@@ -21,6 +21,11 @@
   "config": {
     "forge": "./resources.forge.config.js"
   },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
   },
@@ -30,6 +35,7 @@
     "@electron-forge/maker-rpm": "6.0.0-beta.46",
     "@electron-forge/maker-squirrel": "6.0.0-beta.46",
     "@electron-forge/maker-zip": "6.0.0-beta.46",
-    "electron": "8.0.2"
+    "electron": "8.0.2",
+    "prettier": "^1.19.1"
   }
 }
