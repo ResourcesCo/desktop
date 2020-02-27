@@ -1,9 +1,10 @@
 {
-  "name": "desktop",
-  "productName": "desktop",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "name": "Resources",
+  "productName": "Resources",
+  "version": "0.0.1",
+  "description": "Resources.co Desktop App",
   "main": "src/index.js",
+  "private": true,
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -18,31 +19,7 @@
   },
   "license": "MIT",
   "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "desktop"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
-      ]
-    }
+    "forge": "./resources.forge.config.js"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
