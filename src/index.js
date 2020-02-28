@@ -6,6 +6,10 @@ if (require('electron-squirrel-startup')) {
   app.quit()
 }
 
+try {
+  require('electron-reloader')(module)
+} catch (_) {}
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -13,8 +17,8 @@ let mainWindow
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 800,
   })
 
   // and load the index.html of the app.

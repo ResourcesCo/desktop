@@ -15,6 +15,7 @@ module.exports = {
     appBundleId: 'com.benatkin.ResourcesAlpha',
     appCategoryType: 'public.app-category.developer-tools',
     icon: 'resources/icon',
+    ignore: 'packages/desktop-bundle',
   },
   makers: [
     {
