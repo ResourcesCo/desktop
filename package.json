@@ -3,7 +3,7 @@
   "productName": "Resources",
   "version": "0.0.1",
   "description": "Resources.co Desktop App",
-  "main": "./.webpack/main",
+  "main": ".webpack/main",
   "private": true,
   "scripts": {
     "start": "electron-forge start",
@@ -30,17 +30,17 @@
     "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
-    "@electron-forge/cli": "6.0.0-beta.46",
-    "@electron-forge/maker-deb": "6.0.0-beta.46",
-    "@electron-forge/maker-rpm": "6.0.0-beta.46",
-    "@electron-forge/maker-squirrel": "6.0.0-beta.46",
-    "@electron-forge/maker-zip": "6.0.0-beta.46",
-    "@electron-forge/plugin-webpack": "^6.0.0-beta.50",
+    "@electron-forge/cli": "^6.0.0-beta.46",
+    "@electron-forge/maker-deb": "^6.0.0-beta.46",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.46",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.46",
+    "@electron-forge/maker-zip": "^6.0.0-beta.46",
+    "@electron-forge/plugin-webpack": "^6.0.0-beta.46",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
     "css-loader": "^3.0.0",
-    "node-loader": "^0.6.0",
-    "style-loader": "^0.23.1",
     "electron": "^8.0.2",
-    "prettier": "^1.19.1"
+    "node-loader": "^0.6.0",
+    "prettier": "^1.19.1",
+    "style-loader": "^0.23.1"
   }
 }

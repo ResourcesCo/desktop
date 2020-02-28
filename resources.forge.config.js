@@ -2,6 +2,9 @@ module.exports = {
   packagerConfig: {
     osxSign: {
       hardenedRuntime: true,
+      gatekeeperAssess: false,
+      entitlements: './resources/entitlements.mac.plist',
+      entitlementsInheritz: './resources/entitlements.mac.plist',
     },
     osxNotarize: {
       appBundleId: 'com.benatkin.ResourcesAlpha',
@@ -11,6 +14,7 @@ module.exports = {
     },
     appBundleId: 'com.benatkin.ResourcesAlpha',
     appCategoryType: 'public.app-category.developer-tools',
+    icon: 'resources/icon',
   },
   makers: [
     {
