@@ -1,10 +1,11 @@
 module.exports = {
   packagerConfig: {
     osxSign: {
+      'hardened-runtime': true,
       hardenedRuntime: true,
-      gatekeeperAssess: false,
+      'gatekeeper-assess': false,
       entitlements: './resources/entitlements.mac.plist',
-      entitlementsInherit: './resources/entitlements.mac.plist',
+      'entitlements-inherit': './resources/entitlements.mac.plist',
     },
     osxNotarize: {
       appBundleId: 'com.benatkin.ResourcesAlpha',
