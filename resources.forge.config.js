@@ -4,7 +4,7 @@ module.exports = {
       hardenedRuntime: true,
       gatekeeperAssess: false,
       entitlements: './resources/entitlements.mac.plist',
-      entitlementsInheritz: './resources/entitlements.mac.plist',
+      entitlementsInherit: './resources/entitlements.mac.plist',
     },
     osxNotarize: {
       appBundleId: 'com.benatkin.ResourcesAlpha',
@@ -16,25 +16,10 @@ module.exports = {
     appCategoryType: 'public.app-category.developer-tools',
     icon: 'resources/icon',
     ignore: 'packages/desktop-bundle',
+    extraResource: [
+      'renderer/index.html',
+      'renderer/bundle.js',
+      'renderer/index.css',
+    ],
   },
-  makers: [
-    {
-      name: '@electron-forge/maker-squirrel',
-      config: {
-        name: 'Resources',
-      },
-    },
-    {
-      name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
-    },
-    {
-      name: '@electron-forge/maker-deb',
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-rpm',
-      config: {},
-    },
-  ],
 }
