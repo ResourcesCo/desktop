@@ -46,7 +46,7 @@ module.exports = {
     },
   },
   output: {
-    path: path.resolve(__dirname, '..', '..'),
+    path: path.resolve(__dirname, '..', '..', 'renderer'),
     filename: 'bundle.js',
   },
 }

@@ -1,14 +1,7 @@
 const { app, BrowserWindow } = require('electron')
+const path = require('path')
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-  // eslint-disable-line global-require
-  app.quit()
-}
-
-if (!app.isPackaged) {
-  require('electron-reloader')(module)
-}
+app.allowRendererProcessReuse = true
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -27,7 +20,8 @@ const createWindow = () => {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  const indexPath = path.resolve(__dirname, '..', 'renderer', 'index.html')
+  mainWindow.loadURL(`file://${indexPath}`)
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
