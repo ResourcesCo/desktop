@@ -46,7 +46,7 @@ module.exports = {
     },
   },
   output: {
-    path: path.resolve(__dirname, '..', '..', 'src'),
-    filename: 'app.bundle.js',
+    path: path.resolve(__dirname, '..', '..'),
+    filename: 'bundle.js',
   },
 }

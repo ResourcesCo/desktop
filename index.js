@@ -6,9 +6,9 @@ if (require('electron-squirrel-startup')) {
   app.quit()
 }
 
-try {
+if (!app.isPackaged) {
   require('electron-reloader')(module)
-} catch (_) {}
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -19,10 +19,15 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 800,
+    backgroundColor: '#14191e',
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
   })
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.loadFile('index.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -44,14 +49,6 @@ app.on('ready', createWindow)
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   app.quit()
-})
-
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
-  }
 })
 
 // In this file you can include the rest of your app's specific main process
