@@ -17,10 +17,5 @@ module.exports = {
     appCategoryType: 'public.app-category.developer-tools',
     icon: 'resources/icon',
     ignore: 'packages/desktop-bundle',
-    extraResource: [
-      'renderer/index.html',
-      'renderer/bundle.js',
-      'renderer/index.css',
-    ],
   },
 }
