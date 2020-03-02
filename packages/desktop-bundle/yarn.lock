@@ -821,10 +821,10 @@
   dependencies:
     prop-types "^15.5.10"
 
-"@resources/console@^1.0.0-canary.0":
-  version "1.0.0-canary.0"
-  resolved "https://registry.yarnpkg.com/@resources/console/-/console-1.0.0-canary.0.tgz#8f7ac0942cb0a683daa6317c6011afe32530fc0d"
-  integrity sha512-T07hKs8VjRxfCw3ucG30lJk+yHIGNHRCGHwoS9c02RXxCXh+xhTjflRQziAKh0LMZYOBap+lsgIvRxTyIkH3Rw==
+"@resources/console@^1.0.0-canary.4":
+  version "1.0.0-canary.4"
+  resolved "https://registry.yarnpkg.com/@resources/console/-/console-1.0.0-canary.4.tgz#607ac789b48054eac782ab7389274643aef80bd4"
+  integrity sha512-oGOwsVl56Xp1ZZ581ZkcYbd2MF0jcyab71HhHz/UE71KKXQJmv281mdRlMXBEx2wyabksC9/cW9zWVrk//ezSA==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@fortawesome/fontawesome-svg-core" "^1.2.20"
@@ -832,6 +832,7 @@
     "@fortawesome/react-fontawesome" "^0.1.8"
     clsx "^1.0.4"
     immer "^5.3.6"
+    insert-text-at-cursor "^0.3.0"
     j2ref "^1.0.0"
     lodash "^4.17.15"
     react-autosize-textarea "^7.0.0"
@@ -1941,6 +1942,16 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+extra-watch-webpack-plugin@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/extra-watch-webpack-plugin/-/extra-watch-webpack-plugin-1.0.3.tgz#774248f4ac590159bd5878d862d77afce697d7cc"
+  integrity sha512-ZScQdMH6hNofRRN6QMQFg+aa5vqimfBgnPXmRDhdaLpttT6hrzpY9Oyren3Gh/FySPrgsvKCNbx/NFA7XNdIsg==
+  dependencies:
+    glob "^7.1.2"
+    is-glob "^4.0.0"
+    lodash.uniq "^4.5.0"
+    schema-utils "^0.4.0"
+
 fast-deep-equal@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
@@ -2083,7 +2094,7 @@ glob-parent@^3.1.0:
     is-glob "^3.1.0"
     path-dirname "^1.0.0"
 
-glob@^7.1.3, glob@^7.1.4:
+glob@^7.1.2, glob@^7.1.3, glob@^7.1.4:
   version "7.1.6"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
   integrity sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
@@ -2303,6 +2314,11 @@ ini@^1.3.4, ini@^1.3.5:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
+
+insert-text-at-cursor@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/insert-text-at-cursor/-/insert-text-at-cursor-0.3.0.tgz#1819607680ec1570618347c4cd475e791faa25da"
+  integrity sha512-/nPtyeX9xPUvxZf+r0518B7uqNKlP+LqNJqSiXFEaa2T71rWIwTVXGH7hB9xO/EVdwa5/pWlFCPwShOW81XIxQ==
 
 interpret@1.2.0:
   version "1.2.0"
@@ -2619,6 +2635,11 @@ locate-path@^3.0.0:
   dependencies:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
+
+lodash.uniq@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
+  integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
 lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4:
   version "4.17.15"
@@ -3537,6 +3558,14 @@ scheduler@^0.19.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
+schema-utils@^0.4.0:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.4.7.tgz#ba74f597d2be2ea880131746ee17d0a093c68187"
+  integrity sha512-v/iwU6wvwGK8HbU9yi3/nhGzP0yGSuhQMzL6ySiec1FSrZZDkhm4noOSWzrNFo/jEc+SJY6jRTwuwbSXJPDUnQ==
+  dependencies:
+    ajv "^6.1.0"
+    ajv-keywords "^3.1.0"
+
 schema-utils@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-1.0.0.tgz#0b79a93204d7b600d4b2850d1f66c2a34951c770"
@@ -4090,6 +4119,24 @@ vtv@^1.0.0-canary.14:
   version "1.0.0-canary.14"
   resolved "https://registry.yarnpkg.com/vtv/-/vtv-1.0.0-canary.14.tgz#17e0646fd4af304d0c7e4394707421232bc049f2"
   integrity sha512-jB9+o62s+D8KvJieeCwTpTN8j8XmbUneewa2ggGwVeAiw/OArAusWE5MuG9Y6S5doBoireKiE64eHKLR2JloRg==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    "@fortawesome/fontawesome-svg-core" "^1.2.20"
+    "@fortawesome/free-solid-svg-icons" "^5.12.0"
+    "@fortawesome/react-fontawesome" "^0.1.8"
+    clsx "^1.0.4"
+    immer "^5.3.6"
+    j2ref "^1.0.0"
+    lodash "^4.17.15"
+    prop-types "^15.7.2"
+    react-autosize-textarea "^7.0.0"
+    react-is "^16.8.0"
+    react-popper "^1.3.7"
+
+vtv@^1.0.0-canary.15:
+  version "1.0.0-canary.15"
+  resolved "https://registry.yarnpkg.com/vtv/-/vtv-1.0.0-canary.15.tgz#2e534e7889058190bc28ade5005cb01cc5114fbb"
+  integrity sha512-jCTJAYNQVElpn+R4wDEQX+5mBL/eSkJajg35AQH0S7pBEtix6zKOsw+VDDRbp+Y3B8iD+TeuL3eBmzz7V0053g==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@fortawesome/fontawesome-svg-core" "^1.2.20"

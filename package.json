@@ -1,11 +1,11 @@
 {
-  "name": "Resources-Beta",
+  "name": "Resources.co",
   "version": "0.0.2",
   "description": "Resources.co Desktop App",
   "main": "./main/index.js",
   "private": true,
   "scripts": {
-    "start": "concurrently -n electron,webpack \"yarn electron:start\" \"yarn bundle:watch\"",
+    "start": "concurrently -k -n electron,webpack \"yarn electron:start\" \"yarn bundle:watch\"",
     "build": "yarn bundle:build && yarn electron:package",
     "electron:package": "electron-forge package",
     "electron:start": "electron-forge start",

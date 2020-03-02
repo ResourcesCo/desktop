@@ -9,11 +9,11 @@ module.exports = {
     },
     osxNotarize: {
       appBundleId: 'com.benatkin.ResourcesBeta',
-      appPath: './out/Resources-darwin-x64/ResourcesBeta.app',
+      appPath: './out/Resources-darwin-x64/Resources.co.app',
       appleId: process.env.APPLE_ID,
       appleIdPassword: process.env.APPLE_ID_PASSWORD,
     },
-    name: 'Resources.co Beta',
+    name: 'Resources.co',
     appBundleId: 'com.benatkin.ResourcesBeta',
     appCategoryType: 'public.app-category.developer-tools',
     icon: 'resources/icon',

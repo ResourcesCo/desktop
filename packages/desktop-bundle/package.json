@@ -1,6 +1,6 @@
 {
   "name": "desktop-bundle",
-  "version": "1.0.0.canary.0",
+  "version": "1.0.0-canary.1",
   "description": "desktop bundle for Resources.co",
   "scripts": {
     "build": "webpack",
@@ -20,13 +20,13 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
-    "@resources/console": "^1.0.0-canary.0",
+    "@resources/console": "^1.0.0-canary.4",
     "core-js": "3",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-loader-spinner": "^3.1.5",
     "regenerator-runtime": "^0.13.3",
     "styled-jsx": "^3.2.4",
-    "vtv": "^1.0.0-canary.14"
+    "vtv": "^1.0.0-canary.15"
   }
 }
