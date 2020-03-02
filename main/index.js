@@ -5,7 +5,7 @@ const serve = require('electron-serve')
 app.allowRendererProcessReuse = true
 
 if (!app.isPackaged) {
-  require('electron-reloader')(module)
+  require('electron-reloader')(module, { ignore: ['packages'] })
 }
 
 const loadURL = serve({ directory: path.resolve(__dirname, '..', 'renderer') })

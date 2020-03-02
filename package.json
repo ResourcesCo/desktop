@@ -1,13 +1,16 @@
 {
-  "name": "Resources",
-  "productName": "Resources",
-  "version": "0.0.1",
+  "name": "ResourcesBeta",
+  "version": "0.0.2",
   "description": "Resources.co Desktop App",
   "main": "./main/index.js",
   "private": true,
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package"
+    "start": "concurrently -n electron,webpack \"yarn electron:start\" \"yarn bundle:watch\"",
+    "build": "yarn bundle:build && yarn electron:package",
+    "electron:package": "electron-forge package",
+    "electron:start": "electron-forge start",
+    "bundle:build": "cd packages/desktop-bundle && yarn build",
+    "bundle:watch": "cd packages/desktop-bundle && yarn watch"
   },
   "keywords": [],
   "author": {
@@ -29,6 +32,7 @@
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.46",
+    "concurrently": "^5.1.0",
     "electron": "^8.0.2",
     "electron-reloader": "^1.0.1",
     "prettier": "^1.19.1"

@@ -8,14 +8,21 @@ module.exports = {
       'entitlements-inherit': './resources/entitlements.mac.plist',
     },
     osxNotarize: {
-      appBundleId: 'com.benatkin.ResourcesAlpha',
-      appPath: './out/Resources-darwin-x64/Resources.app',
+      appBundleId: 'com.benatkin.ResourcesBeta',
+      appPath: './out/Resources-darwin-x64/ResourcesBeta.app',
       appleId: process.env.APPLE_ID,
       appleIdPassword: process.env.APPLE_ID_PASSWORD,
     },
-    appBundleId: 'com.benatkin.ResourcesAlpha',
+    name: 'Resources.co Beta',
+    appBundleId: 'com.benatkin.ResourcesBeta',
     appCategoryType: 'public.app-category.developer-tools',
     icon: 'resources/icon',
     ignore: 'packages/desktop-bundle',
   },
+  makers: [
+    {
+      name: '@electron-forge/maker-zip',
+      platforms: ['darwin'],
+    },
+  ],
 }

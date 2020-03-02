@@ -1,4 +1,5 @@
 const path = require('path')
+const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -49,4 +50,9 @@ module.exports = {
     path: path.resolve(__dirname, '..', '..', 'renderer'),
     filename: 'bundle.js',
   },
+  plugins: [
+    new ExtraWatchWebpackPlugin({
+      dirs: ['node_modules/vtv/src', 'node_modules/@resources/console/src'],
+    }),
+  ],
 }
