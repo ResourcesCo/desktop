@@ -5,13 +5,9 @@
   "main": "./main/index.js",
   "private": true,
   "scripts": {
-    "start": "concurrently -k -n electron,webpack \"yarn electron:start\" \"yarn bundle:watch\"",
-    "build": "yarn bundle:build && yarn electron:make",
-    "electron:package": "electron-forge package",
-    "electron:make": "electron-forge make",
-    "electron:start": "electron-forge start",
-    "bundle:build": "cd packages/desktop-bundle && yarn build",
-    "bundle:watch": "cd packages/desktop-bundle && yarn watch"
+    "make": "electron-forge make",
+    "package": "electron-forge package",
+    "start": "electron-forge start"
   },
   "keywords": [],
   "author": {
