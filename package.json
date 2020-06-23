@@ -6,8 +6,9 @@
   "private": true,
   "scripts": {
     "start": "concurrently -k -n electron,webpack \"yarn electron:start\" \"yarn bundle:watch\"",
-    "build": "yarn bundle:build && yarn electron:package",
+    "build": "yarn bundle:build && yarn electron:make",
     "electron:package": "electron-forge package",
+    "electron:make": "electron-forge make",
     "electron:start": "electron-forge start",
     "bundle:build": "cd packages/desktop-bundle && yarn build",
     "bundle:watch": "cd packages/desktop-bundle && yarn watch"
@@ -32,7 +33,7 @@
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.46",
-    "concurrently": "^5.1.0",
+    "@electron-forge/maker-zip": "^6.0.0-beta.50",
     "electron": "^8.0.2",
     "electron-reloader": "^1.0.1",
     "prettier": "^1.19.1"
