@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const serve = require('electron-serve')
 
@@ -13,6 +13,12 @@ const loadURL = serve({ directory: path.resolve(__dirname, '..', 'renderer') })
 async function init() {
   await app.whenReady()
 
+  ipcMain.on('rco.request', (event, messageId, request) => {
+    console.log('handling message', messageId)
+    const response = { text: 'somethingFromNode' }
+    event.reply('rco.response', messageId, response)
+  })
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1280,
@@ -21,6 +27,8 @@ async function init() {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
+      enableRemoteModule: false,
+      preload: path.resolve(__dirname, 'preload.js'),
     },
   })
 

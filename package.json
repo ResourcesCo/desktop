@@ -7,7 +7,10 @@
   "scripts": {
     "make": "electron-forge make",
     "package": "electron-forge package",
-    "start": "electron-forge start"
+    "start": "yarn renderer:build && yarn renderer:import && yarn electron:start",
+    "renderer:build": "cd ../resources && yarn electron:build && yarn electron:export",
+    "renderer:import": "rm -r ./renderer && cp -r ../resources/renderer ./renderer",
+    "electron:start": "electron-forge start"
   },
   "keywords": [],
   "author": {
