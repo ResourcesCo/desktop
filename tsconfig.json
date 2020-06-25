@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "outDir": "main",
+    "baseUrl": "./src"
+  },
+  "include": ["src/**/*"]
+}

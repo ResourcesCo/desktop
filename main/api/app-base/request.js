@@ -1,3 +1,15 @@
+"use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,57 +46,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _a = require('electron'), contextBridge = _a.contextBridge, ipcRenderer = _a.ipcRenderer;
-var currentMessageId = 0;
-var openRequests = {};
-var handleRequest = function (request) {
-    var messageId = currentMessageId++;
-    var promise = new Promise(function (resolve, reject) {
-        openRequests[messageId] = [resolve, reject];
-    });
-    ipcRenderer.send('rco.request', messageId, request);
-    return promise;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-ipcRenderer.on('rco.response', function (event, messageId, response) {
-    var _a = openRequests[messageId], resolve = _a[0], reject = _a[1];
-    delete openRequests[messageId];
-    resolve(response);
-});
-var rco = {
-    request: function (request) {
-        return __awaiter(this, void 0, void 0, function () {
-            var requestData, response, err_1, responseData;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        try {
-                            requestData = JSON.parse(JSON.stringify(request));
-                        }
-                        catch (err) {
-                            return [2 /*return*/, { error: 'Error parsing request' }];
-                        }
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, handleRequest(requestData)];
-                    case 2:
-                        response = _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_1 = _a.sent();
-                        return [2 /*return*/, { error: "Error handling request: " + err_1 }];
-                    case 4:
-                        try {
-                            responseData = JSON.parse(JSON.stringify(response));
-                        }
-                        catch (err) {
-                            return [2 /*return*/, { error: 'Error parsing response' }];
-                        }
-                        return [2 /*return*/, responseData];
-                }
-            });
+exports.__esModule = true;
+var isomorphic_unfetch_1 = __importDefault(require("isomorphic-unfetch"));
+function request(_a) {
+    var url = _a.url, method = _a.method, headers = _a.headers, body = _a.body;
+    return __awaiter(this, void 0, void 0, function () {
+        var bodyParam, res;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    bodyParam = body
+                        ? { body: typeof body === 'string' ? body : JSON.stringify(body) }
+                        : {};
+                    return [4 /*yield*/, isomorphic_unfetch_1["default"](url, __assign({ method: method,
+                            headers: headers }, bodyParam))];
+                case 1:
+                    res = _b.sent();
+                    return [2 /*return*/, { ok: res.ok }];
+            }
         });
-    }
-};
-contextBridge.exposeInMainWorld('rco', rco);
-//# sourceMappingURL=preload.js.map
+    });
+}
+exports["default"] = request;
+//# sourceMappingURL=request.js.map

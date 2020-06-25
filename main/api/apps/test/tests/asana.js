@@ -39,48 +39,63 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-var electron_1 = require("electron");
-var path_1 = __importDefault(require("path"));
-var electron_serve_1 = __importDefault(require("electron-serve"));
-electron_1.app.allowRendererProcessReuse = true;
-if (!electron_1.app.isPackaged) {
-    require('electron-reloader')(module, { ignore: ['packages'] });
-}
-var loadURL = electron_serve_1["default"]({ directory: path_1["default"].resolve(__dirname, '..', 'renderer') });
-function init() {
+var ConsoleWorkspace_1 = __importDefault(require("api/workspace/ConsoleWorkspace"));
+var parseCommand_1 = __importDefault(require("api/channel/parseCommand"));
+function asana() {
     return __awaiter(this, void 0, void 0, function () {
-        var mainWindow;
+        var workspace, channel, receivedRequest, receivedMessages, onMessage, messages, results, _i, messages_1, message, result;
+        var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, electron_1.app.whenReady()];
+                case 0:
+                    workspace = ConsoleWorkspace_1["default"].getWorkspace();
+                    return [4 /*yield*/, workspace.getChannel('main')];
                 case 1:
-                    _a.sent();
-                    electron_1.ipcMain.on('rco.request', function (event, messageId, request) {
-                        var response = { text: 'somethingFromNode' };
-                        event.reply('rco.response', messageId, response);
-                    });
-                    mainWindow = new electron_1.BrowserWindow({
-                        width: 1280,
-                        height: 800,
-                        backgroundColor: '#14191e',
-                        webPreferences: {
-                            nodeIntegration: false,
-                            contextIsolation: true,
-                            enableRemoteModule: false,
-                            preload: path_1["default"].resolve(__dirname, 'preload.js')
-                        }
-                    });
-                    return [4 /*yield*/, loadURL(mainWindow)];
+                    channel = _a.sent();
+                    // mock the request
+                    channel.apps.asana.request = function (request) { return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            receivedRequest = request;
+                            return [2 /*return*/, { ok: true }];
+                        });
+                    }); };
+                    receivedMessages = [];
+                    onMessage = function (message) {
+                        receivedMessages.push(message);
+                    };
+                    messages = [
+                        'https://asana.com/ :auth apiKey',
+                        'https://app.asana.com/0/1180016330032425/1180016330032432 :complete',
+                    ];
+                    results = [];
+                    _i = 0, messages_1 = messages;
+                    _a.label = 2;
                 case 2:
-                    _a.sent();
+                    if (!(_i < messages_1.length)) return [3 /*break*/, 5];
+                    message = messages_1[_i];
+                    return [4 /*yield*/, channel.runCommand({
+                            message: message,
+                            parsed: parseCommand_1["default"](message),
+                            onMessage: onMessage
+                        })];
+                case 3:
+                    result = _a.sent();
+                    results.push(result);
+                    _a.label = 4;
+                case 4:
+                    _i++;
+                    return [3 /*break*/, 2];
+                case 5:
+                    if (results.every(function (a) { return !!a; }) && receivedRequest.method === 'PUT') {
+                        return [2 /*return*/, '1 test passed'];
+                    }
+                    else {
+                        return [2 /*return*/, '(error)'];
+                    }
                     return [2 /*return*/];
             }
         });
     });
 }
-init();
-// Quit when all windows are closed.
-electron_1.app.on('window-all-closed', function () {
-    electron_1.app.quit();
-});
-//# sourceMappingURL=index.js.map
+exports["default"] = asana;
+//# sourceMappingURL=asana.js.map

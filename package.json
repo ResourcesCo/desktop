@@ -7,7 +7,10 @@
   "scripts": {
     "make": "electron-forge make",
     "package": "electron-forge package",
-    "start": "yarn renderer:build && yarn renderer:import && yarn electron:start",
+    "start": "yarn main:build && yarn renderer:build && yarn renderer:import && yarn electron:start",
+    "main:import": "rm -rf ./src/api && cp -r ../resources/api ./src/api",
+    "main:build": "tsc",
+    "main:watch": "tsc -w",
     "renderer:build": "cd ../resources && yarn electron:build && yarn electron:export",
     "renderer:import": "rm -r ./renderer && cp -r ../resources/renderer ./renderer",
     "electron:start": "electron-forge start"
@@ -28,13 +31,19 @@
   },
   "dependencies": {
     "electron-serve": "^0.4.1",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "j2ref": "^1.0.0",
+    "path-to-regexp": "^6.1.0",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.46",
     "@electron-forge/maker-zip": "^6.0.0-beta.50",
+    "@types/node": "12",
     "electron": "^8.0.2",
     "electron-reloader": "^1.0.1",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "typescript": "^3.9.5"
   }
 }

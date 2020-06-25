@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,57 +35,60 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _a = require('electron'), contextBridge = _a.contextBridge, ipcRenderer = _a.ipcRenderer;
-var currentMessageId = 0;
-var openRequests = {};
-var handleRequest = function (request) {
-    var messageId = currentMessageId++;
-    var promise = new Promise(function (resolve, reject) {
-        openRequests[messageId] = [resolve, reject];
-    });
-    ipcRenderer.send('rco.request', messageId, request);
-    return promise;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-ipcRenderer.on('rco.response', function (event, messageId, response) {
-    var _a = openRequests[messageId], resolve = _a[0], reject = _a[1];
-    delete openRequests[messageId];
-    resolve(response);
-});
-var rco = {
-    request: function (request) {
+exports.__esModule = true;
+var ConsoleError_1 = __importDefault(require("../ConsoleError"));
+var BrowserFileStore = /** @class */ (function () {
+    function BrowserFileStore(_a) {
+        var prefix = _a.prefix;
+        this.localStorage = window.localStorage;
+        this.prefix = prefix;
+    }
+    BrowserFileStore.prototype.getItemName = function (path) {
+        if (path.endsWith('.json')) {
+            return "" + this.prefix + path;
+        }
+        else {
+            throw new ConsoleError_1["default"]('unsupported file type');
+        }
+    };
+    BrowserFileStore.prototype.get = function (_a) {
+        var path = _a.path;
         return __awaiter(this, void 0, void 0, function () {
-            var requestData, response, err_1, responseData;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        try {
-                            requestData = JSON.parse(JSON.stringify(request));
-                        }
-                        catch (err) {
-                            return [2 /*return*/, { error: 'Error parsing request' }];
-                        }
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, handleRequest(requestData)];
-                    case 2:
-                        response = _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_1 = _a.sent();
-                        return [2 /*return*/, { error: "Error handling request: " + err_1 }];
-                    case 4:
-                        try {
-                            responseData = JSON.parse(JSON.stringify(response));
-                        }
-                        catch (err) {
-                            return [2 /*return*/, { error: 'Error parsing response' }];
-                        }
-                        return [2 /*return*/, responseData];
+            var data;
+            return __generator(this, function (_b) {
+                data = this.localStorage.getItem(this.getItemName(path));
+                try {
+                    return [2 /*return*/, JSON.parse(data)];
                 }
+                catch (e) {
+                    throw new ConsoleError_1["default"]('error parsing JSON');
+                }
+                return [2 /*return*/];
             });
         });
-    }
-};
-contextBridge.exposeInMainWorld('rco', rco);
-//# sourceMappingURL=preload.js.map
+    };
+    BrowserFileStore.prototype.put = function (_a) {
+        var path = _a.path, value = _a.value;
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                this.localStorage.setItem(this.getItemName(path), JSON.stringify(value, null, 2));
+                return [2 /*return*/];
+            });
+        });
+    };
+    BrowserFileStore.prototype["delete"] = function (_a) {
+        var path = _a.path;
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                this.localStorage.removeItem(this.getItemName(path));
+                return [2 /*return*/];
+            });
+        });
+    };
+    return BrowserFileStore;
+}());
+exports["default"] = BrowserFileStore;
+//# sourceMappingURL=BrowserFileStore.js.map

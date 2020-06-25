@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,57 +35,51 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _a = require('electron'), contextBridge = _a.contextBridge, ipcRenderer = _a.ipcRenderer;
-var currentMessageId = 0;
-var openRequests = {};
-var handleRequest = function (request) {
-    var messageId = currentMessageId++;
-    var promise = new Promise(function (resolve, reject) {
-        openRequests[messageId] = [resolve, reject];
-    });
-    ipcRenderer.send('rco.request', messageId, request);
-    return promise;
-};
-ipcRenderer.on('rco.response', function (event, messageId, response) {
-    var _a = openRequests[messageId], resolve = _a[0], reject = _a[1];
-    delete openRequests[messageId];
-    resolve(response);
-});
-var rco = {
-    request: function (request) {
-        return __awaiter(this, void 0, void 0, function () {
-            var requestData, response, err_1, responseData;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        try {
-                            requestData = JSON.parse(JSON.stringify(request));
+exports.__esModule = true;
+function get(_a) {
+    var fileStore = _a.fileStore, url = _a.url, args = _a.args;
+    return __awaiter(this, void 0, void 0, function () {
+        var path, result, err_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    path = url.split('/').slice(1);
+                    if (!(path.length === 0)) return [3 /*break*/, 1];
+                    return [2 /*return*/, {
+                            type: 'text',
+                            text: 'List not yet implemented'
+                        }];
+                case 1:
+                    result = void 0;
+                    _b.label = 2;
+                case 2:
+                    _b.trys.push([2, 4, , 5]);
+                    return [4 /*yield*/, fileStore.get({
+                            path: '/' + path.map(function (s) { return encodeURIComponent(s); }).join('/')
+                        })];
+                case 3:
+                    result = _b.sent();
+                    return [3 /*break*/, 5];
+                case 4:
+                    err_1 = _b.sent();
+                    return [2 /*return*/, {
+                            type: 'text',
+                            text: 'Error getting file'
+                        }];
+                case 5: return [2 /*return*/, {
+                        type: 'tree',
+                        name: path[path.length - 1],
+                        value: result.body,
+                        state: {
+                            _expanded: true,
+                            _actions: [
+                                { name: 'save', title: 'Save', primary: true, show: 'changed' },
+                            ]
                         }
-                        catch (err) {
-                            return [2 /*return*/, { error: 'Error parsing request' }];
-                        }
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, handleRequest(requestData)];
-                    case 2:
-                        response = _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_1 = _a.sent();
-                        return [2 /*return*/, { error: "Error handling request: " + err_1 }];
-                    case 4:
-                        try {
-                            responseData = JSON.parse(JSON.stringify(response));
-                        }
-                        catch (err) {
-                            return [2 /*return*/, { error: 'Error parsing response' }];
-                        }
-                        return [2 /*return*/, responseData];
-                }
-            });
+                    }];
+            }
         });
-    }
-};
-contextBridge.exposeInMainWorld('rco', rco);
-//# sourceMappingURL=preload.js.map
+    });
+}
+exports["default"] = get;
+//# sourceMappingURL=get.js.map
