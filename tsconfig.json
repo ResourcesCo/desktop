@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "target": "ESNext",
     "esModuleInterop": true,
-    "sourceMap": true,
     "outDir": "main",
     "baseUrl": "./src"
   },

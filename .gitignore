@@ -90,4 +90,5 @@ out/
 /renderer
 
 # Imported from resources repo
+/main
 /src/api

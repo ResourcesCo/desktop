@@ -7,7 +7,7 @@
   "scripts": {
     "make": "electron-forge make",
     "package": "electron-forge package",
-    "start": "yarn main:build && yarn renderer:build && yarn renderer:import && yarn electron:start",
+    "start": "yarn main:import && yarn main:build && yarn renderer:build && yarn renderer:import && yarn electron:start",
     "main:import": "rm -rf ./src/api && cp -r ../resources/api ./src/api",
     "main:build": "tsc",
     "main:watch": "tsc -w",
