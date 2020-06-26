@@ -30,7 +30,6 @@
     "trailingComma": "es5"
   },
   "dependencies": {
-    "electron-serve": "^0.4.1",
     "electron-squirrel-startup": "^1.0.0",
     "isomorphic-unfetch": "^3.0.0",
     "j2ref": "^1.0.0",
