@@ -2,11 +2,8 @@ import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'path'
 import serve from './serve'
 import ConsoleWorkspace from './api/workspace/ConsoleWorkspace'
-import ConsoleChannel from './api/channel/ConsoleChannel'
-import LocalFileStore from './api/storage/LocalFileStore'
-
-ConsoleWorkspace.LocalFileStore = LocalFileStore
-ConsoleChannel.LocalFileStore = LocalFileStore
+import ConsoleError from './api/ConsoleError'
+import LocalFileStore from 'api/storage/LocalFileStore'
 
 app.allowRendererProcessReuse = true
 
@@ -16,16 +13,47 @@ if (!app.isPackaged) {
 
 const loadURL = serve({ directory: path.resolve(__dirname, '..', 'renderer') })
 
-async function requestWithApi({ url, method, body }) {
-  const workspace = ConsoleWorkspace.getWorkspace(body)
-  const workspaceConfig = await workspace.getClientConfig(body)
-  return {
-    ok: true,
-    status: 200,
-    body: {
-      workspaceConfig,
-    },
+async function handleFileRequest(req) {
+  try {
+    const path = req.path
+    const workspace = await ConsoleWorkspace.getWorkspace({
+      fileStoreClass: LocalFileStore,
+    })
+    let responseBody
+    if (req.method === 'GET') {
+      responseBody = await workspace.fileStore.get({ path })
+    } else if (req.method === 'PUT') {
+      if (!(req.body && 'value' in req.body)) {
+        throw new ConsoleError('Content must be JSON object with value key', {
+          status: 422,
+        })
+      }
+      responseBody = await workspace.fileStore.put({ ...req.body, path })
+    } else if (req.method === 'DELETE') {
+      responseBody = await workspace.fileStore.delete({ path })
+    } else {
+      throw new ConsoleError('Invalid method for path', { status: 400 })
+    }
+    return responseBody
+  } catch (err) {
+    if (err instanceof ConsoleError) {
+      return {
+        ok: false,
+        status: err.data.status,
+        body: err.data,
+      }
+    } else {
+      throw err
+    }
   }
+}
+
+async function requestWithApi({ url, method, body }) {
+  let path = new URL('/files/workspace.json', 'https://api.local/').pathname
+  if (path.startsWith('/files')) {
+    path = path.replace(/^\/files/, '')
+  }
+  return await handleFileRequest({ path, method, body })
 }
 
 async function init() {
