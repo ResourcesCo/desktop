@@ -3,7 +3,7 @@ import path from 'path'
 import serve from './serve'
 import ConsoleWorkspace from './api/workspace/ConsoleWorkspace'
 import ConsoleError from './api/ConsoleError'
-import LocalFileStore from 'api/storage/LocalFileStore'
+import LocalFileStore from './api/storage/LocalFileStore'
 
 app.allowRendererProcessReuse = true
 

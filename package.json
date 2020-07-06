@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "Resources.co Desktop App",
   "main": "./main/index.js",
+  "type": "commonjs",
   "private": true,
   "scripts": {
     "make": "electron-forge make",
