@@ -18,12 +18,13 @@ async function handleFileRequest(req) {
     const path = req.path
     const workspace = await ConsoleWorkspace.getWorkspace({
       fileStoreClass: LocalFileStore,
+      localPath: app.getPath('userData') + '/workspace',
     })
     let responseBody
     if (req.method === 'GET') {
       responseBody = await workspace.fileStore.get({ path })
     } else if (req.method === 'PUT') {
-      if (!(req.body && 'value' in req.body)) {
+      if (!(req.body && typeof req.body === 'object' && 'value' in req.body)) {
         throw new ConsoleError('Content must be JSON object with value key', {
           status: 422,
         })
@@ -49,7 +50,8 @@ async function handleFileRequest(req) {
 }
 
 async function requestWithApi({ url, method, body }) {
-  let path = new URL('/files/workspace.json', 'https://api.local/').pathname
+  let path = new URL('/files/workspace.json', 'https://workspace.local/')
+    .pathname
   if (path.startsWith('/files')) {
     path = path.replace(/^\/files/, '')
   }
