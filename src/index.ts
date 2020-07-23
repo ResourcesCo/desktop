@@ -50,12 +50,16 @@ async function handleFileRequest(req) {
 }
 
 async function requestWithApi({ url, method, body }) {
-  let path = new URL('/files/workspace.json', 'https://workspace.local/')
-    .pathname
-  if (path.startsWith('/files')) {
-    path = path.replace(/^\/files/, '')
+  let path = new URL(url, 'https://workspace.local/').pathname
+  if (path.startsWith('/api/files')) {
+    path = path.replace(/^\/api\/files/, '')
   }
-  return await handleFileRequest({ path, method, body })
+  const fileRes = await handleFileRequest({
+    path,
+    method,
+    body,
+  })
+  return { status: 200, body: fileRes }
 }
 
 async function init() {
