@@ -5,6 +5,9 @@ import ConsoleWorkspace from './api/workspace/ConsoleWorkspace'
 import ConsoleError from './api/ConsoleError'
 import LocalFileStore from './api/storage/LocalFileStore'
 
+// eval is useful for highly customizable apps
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1'
+
 app.allowRendererProcessReuse = true
 
 if (!app.isPackaged) {
