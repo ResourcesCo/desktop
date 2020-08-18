@@ -87,3 +87,9 @@ typings/
 
 # Electron-Forge
 out/
+/renderer
+
+# Imported from resources repo
+/main
+/src/api
+/src/vtv-model
